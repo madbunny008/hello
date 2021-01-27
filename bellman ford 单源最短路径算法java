@@ -1,3 +1,7 @@
+# 讲解 https://www.bilibili.com/video/BV1gb41137u4 
+# 原视频：https://www.youtube.com/watch?v=lyw4FaxrwHg 原作者github：https://github.com/williamfiset/algorithms
+
+
 /**
  * An implementation of the Bellman-Ford algorithm. The algorithm finds the shortest path between a
  * starting node and all other nodes in the graph. The algorithm also detects negative cycles.
