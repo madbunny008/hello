@@ -8,12 +8,12 @@ package com.williamfiset.algorithms.graphtheory;
 
 public class BellmanFordEdgeList {
 
-  // A directed edge
+  // A directed edge    # 定义一个有向图 
   public static class Edge {
     double cost;
     int from, to;
 
-    public Edge(int from, int to, double cost) {
+    public Edge(int from, int to, double cost) { # 起点，终点，权重
       this.to = to;
       this.from = from;
       this.cost = cost;
@@ -30,18 +30,18 @@ public class BellmanFordEdgeList {
    * @param V - The number of vertices in the graph.
    * @param start - The id of the starting node
    */
-  public static double[] bellmanFord(Edge[] edges, int V, int start) {
+  public static double[] bellmanFord(Edge[] edges, int V, int start) {  #需要一个图，输入边，节点个数， 返回的是一个距离数组和起点
 
-    double[] dist = new double[V];
+    double[] dist = new double[V];  #初始化距离数组，常用的方法是初始化一个特殊的值
     java.util.Arrays.fill(dist, Double.POSITIVE_INFINITY);
-    dist[start] = 0;
+    dist[start] = 0; #设置起点距离为0
 
     // Only in the worst case does it take V-1 iterations for the Bellman-Ford
     // algorithm to complete. Another stopping condition is when we're unable to
     // relax an edge, this means we have reached the optimal solution early.
     boolean relaxedAnEdge = true;
 
-    // For each vertex, apply relaxation for all the edges
+    // For each vertex, apply relaxation for all the edges  #循环v-1次，对每条边进行松弛操作
     for (int v = 0; v < V - 1 && relaxedAnEdge; v++) {
       relaxedAnEdge = false;
       for (Edge edge : edges) {
@@ -52,7 +52,7 @@ public class BellmanFordEdgeList {
       }
     }
 
-    // Run algorithm a second time to detect which nodes are part
+    // Run algorithm a second time to detect which nodes are part #检查负圈
     // of a negative cycle. A negative cycle has occurred if we
     // can find a better path beyond the optimal solution.
     relaxedAnEdge = true;
@@ -60,7 +60,7 @@ public class BellmanFordEdgeList {
       relaxedAnEdge = false;
       for (Edge edge : edges) {
         if (dist[edge.from] + edge.cost < dist[edge.to]) {
-          dist[edge.to] = Double.NEGATIVE_INFINITY;
+          dist[edge.to] = Double.NEGATIVE_INFINITY;  #负圈的值更新为无穷小
           relaxedAnEdge = true;
         }
       }
